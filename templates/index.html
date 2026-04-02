@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Where to Set Up Shop: Singapore F&B Market Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/shared.css"/>
+  <link rel="stylesheet" href="/static/css/index.css"/>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><div class="dot"></div>Where to Set Up Shop</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="/">Analysis</a>
+      <a class="nav-link" href="#dashboards">Dashboards</a>
+      <a class="nav-link" href="#combined">Market View</a>
+      <a class="nav-link cta" href="/recommender">→ Find My Location</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Singapore · F&amp;B Market Intelligence</div>
+      <h1>Despite the odds,<br>Singaporeans keep<br><em>opening F&amp;Bs.</em></h1>
+      <p class="hero-sub">Despite high failure rates and rising operational costs, the aspiration to own an F&amp;B business in Singapore remains strong. The question is not <em>whether</em> to open — it's <em>where</em>.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="/recommender">Find my location →</a>
+        <a class="btn btn-ghost" href="#dashboards">Explore the data</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-icon" style="background:rgba(201,79,42,.15)">🏪</div>
+        <div><div class="hero-stat-num" id="stat-estab">31,029</div><div class="hero-stat-label">F&amp;B Licences active</div></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-icon" style="background:rgba(26,107,94,.15)">🗺️</div>
+        <div><div class="hero-stat-num" id="stat-areas">29</div><div class="hero-stat-label">Planning areas analysed</div></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-icon" style="background:rgba(201,134,10,.15)">📍</div>
+        <div><div class="hero-stat-num" id="stat-demand-area">—</div><div class="hero-stat-label">Highest demand area</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="problem-inner page">
+    <div>
+      <div class="section-eyebrow">Problem Statement</div>
+      <h2>Finding the right location can make or break an F&amp;B business.</h2>
+      <div class="problem-text">
+        <p>Singapore's F&amp;B sector is one of the most competitive in Asia. With <strong>over 31,000 licensed outlets</strong> across 29 planning areas, new entrants face a complex decision landscape spanning rental costs, customer demographics, transport accessibility, and market saturation.</p>
+        <p>Information is <strong>fragmented across multiple sources</strong> : URA rental data, NEA licensing records, and census demographics — making it difficult for aspiring operators to form a clear view of any neighbourhood before committing.</p>
+        <p>Our platform consolidates these signals into a single analytical view, structured around the four factors that most determine location success.</p>
+      </div>
+    </div>
+    <div class="challenge-list">
+      <div class="challenge-item"><div class="challenge-num">1</div><div class="challenge-text"><strong>Where is spending power?</strong> High-income concentration varies sharply. Premium and budget concepts need very different catchments.</div></div>
+      <div class="challenge-item"><div class="challenge-num">2</div><div class="challenge-text"><strong>How saturated is the market?</strong> Downtown Core and Geylang have 2,000+ outlets each. Lower-supply areas may offer better odds for new entrants.</div></div>
+      <div class="challenge-item"><div class="challenge-num">3</div><div class="challenge-text"><strong>What will it cost to operate?</strong> Rental costs range from $63 to $314/sqm/month. Newer towns often cost more than central ones.</div></div>
+      <div class="challenge-item"><div class="challenge-num">4</div><div class="challenge-text"><strong>Can customers reach you?</strong> Areas like Bukit Timah have low public transport density, limiting walk-in traffic despite strong demographics.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="overview-inner page">
+    <div class="overview-claim">"Despite F&amp;B businesses struggling — especially in recent times — Singaporeans are not deterred in aspiring to open their own F&amp;B establishments."</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-big">31K+</div><div class="stat-desc">Active F&amp;B licences</div></div>
+      <div class="stat-box"><div class="stat-big">29</div><div class="stat-desc">Planning areas</div></div>
+      <div class="stat-box"><div class="stat-big">7</div><div class="stat-desc">F&amp;B concept types</div></div>
+      <div class="stat-box"><div class="stat-big">5</div><div class="stat-desc">Regions covered</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboards">
+  <div class="dash-inner page">
+    <div class="dash-header">
+      <div class="section-eyebrow" style="justify-content:center">What are you concerned about?</div>
+      <h2>Four factors. One decision.</h2>
+      <p>Select a factor to explore its dashboard and key insights across Singapore's 29 planning areas.</p>
+    </div>
+
+    <div class="factor-grid">
+      <div class="factor-card fc-demand active" onclick="showPanel('demand',this)">
+        <div class="factor-icon">🎯</div>
+        <div><h3>Target Audience</h3><p>Where is spending power concentrated, and who are your future customers?</p></div>
+        <div class="factor-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="factor-card fc-supply" onclick="showPanel('supply',this)">
+        <div class="factor-icon">🏘️</div>
+        <div><h3>Neighbourhood Demographics</h3><p>How many competitors exist, and what concepts dominate each area?</p></div>
+        <div class="factor-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="factor-card fc-cost" onclick="showPanel('cost',this)">
+        <div class="factor-icon">💰</div>
+        <div><h3>Operational Costs</h3><p>What will it cost to rent here, and how have prices trended over time?</p></div>
+        <div class="factor-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="factor-card fc-access" onclick="showPanel('access',this)">
+        <div class="factor-icon">🚇</div>
+        <div><h3>Accessibility</h3><p>How reachable is each area by MRT and bus within 500m of your establishment?</p></div>
+        <div class="factor-arrow">Explore <span>→</span></div>
+      </div>
+    </div>
+
+    <!-- DEMAND PANEL -->
+    <div class="dash-panel active" id="panel-demand">
+      <div class="panel-header">
+        <span class="panel-badge" style="background:var(--rust-dim);color:var(--rust)">🎯 Target Audience</span>
+        <div class="panel-header-decoration"></div>
+      </div>
+      <p class="panel-desc">Finding the right location can make or break an F&B business. Our tool helps food vendors analyse demand conditions across 29 planning areas in Singapore, showing where purchasing power is concentrated, who lives there, and what food preferences to expect, so you can choose locations that match your concept and target customer.</p>
+      
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableauPlaceholder' id='viz1775066911189' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Purchasing Power Map ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;PurchasingPowerMap&#47;1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+              <param name='embed_code_version' value='3' /> 
+              <param name='site_root' value='' />
+              <param name='name' value='demand_17750618803560&#47;PurchasingPowerMap' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;PurchasingPowerMap&#47;1.png' /> 
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-US' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+        </div>
+        <p class="embed-caption">This map reflects the proportion of high-income households (earning $10,000/month and above) per planning area, serving as a proxy for consumer spending capacity on F&B.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p>Purchasing power is heavily concentrated in central and southern planning areas such as <strong>Tanglin, River Valley, Downtown Core and Bukit Timah</strong>. These areas are well-suited for premium F&B concepts such as fine dining, specialty cafes, and boutique concepts where higher price points are sustainable.</p>
+        </div>
+        <div class="insight-card">
+            <p>In contrast, areas such as <strong>Outram, Bukit Merah and Kallang</strong> show higher concentrations of lower-income households. These locations favour affordable, high-volume F&B concepts such as <strong>hawker stalls, budget eateries and coffee shops</strong>.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableauPlaceholder' id='viz1775067196936' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Income Distribution Small Multiples Chart  ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;IncomeDistributionSmallMultiplesChart&#47;1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+              <param name='embed_code_version' value='3' /> 
+              <param name='site_root' value='' />
+              <param name='name' value='demand_17750618803560&#47;IncomeDistributionSmallMultiplesChart' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;IncomeDistributionSmallMultiplesChart&#47;1.png' /> 
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-GB' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+        </div>
+        <p class="embed-caption">Income profiles vary significantly across planning areas, and matching your price point to the local income profile is critical for sustainable F&B operations.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>Tanglin, River Valley, Downtown Core and Bukit Timah</strong> are dominated by the High ($10K+) tier, indicating residents with strong disposable income and appetite for premium dining experiences.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Outram, Kallang and Geylang</strong> show notably larger Low (Below $4K) segments, signalling that affordable concepts with competitive pricing will resonate more strongly with local residents.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Mid-tier areas</strong> such as Bishan, Serangoon and Tampines show a more balanced spread across income tiers, making them versatile locations suitable for casual mid-range dining concepts that appeal broadly.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableauPlaceholder' id='viz1775067354205' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Age Group HeatMap ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;AgeGroupHeatMap&#47;1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+              <param name='embed_code_version' value='3' /> 
+              <param name='site_root' value='' />
+              <param name='name' value='demand_17750618803560&#47;AgeGroupHeatMap' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;AgeGroupHeatMap&#47;1.png' /> 
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-GB' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+        </div>
+        <p class="embed-caption">Age composition directly influences dining behaviour. Younger working adults eat out more frequently and spend more per visit, while elderly populations tend to prefer affordable, familiar options.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>Downtown Core, Sembawang, Punggol and Woodlands</strong> have the highest concentration of working-age residents (20–54). These areas generate strong weekday and weekend dining demand, particularly for lunch sets, casual dining and delivery-friendly concepts.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Outram, Ang Mo Kio, Bukit Merah, Kallang and Toa Payoh</strong> show the highest elderly population proportions (18–22%). These areas have strong demand for traditional, affordable food options like hawker fare, zi char, and kopitiam-style concepts perform well here.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Punggol and Sengkang</strong> show strong concentration in the 25–39 age bracket, reflecting young families: an underserved segment for family-friendly dining, weekend brunch concepts and casual group dining.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableauPlaceholder' id='viz1775067540702' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Demand Quadrant ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;DemandQuadrant&#47;1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+              <param name='embed_code_version' value='3' /> 
+              <param name='site_root' value='' />
+              <param name='name' value='demand_17750618803560&#47;DemandQuadrant' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;DemandQuadrant&#47;1.png' /> 
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-GB' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+        </div>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>River Valley, Downtown Core, Pasir Ris, Punggol, Sengkang and Choa Chu Kang</strong> sit above average on both dimensions, indicating strong purchasing power combined with a large working-age population. These locations offer the most well-rounded demand conditions and can support a wide range of F&B concepts from casual dining to premium experiences.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Downtown Core</strong> is the strongest outlier in this quadrant with the highest working-age concentration and among the highest income levels. It is particularly well-suited for lunch concepts, after-work dining and premium casual formats targeting professionals.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Woodlands, Sembawang, Jurong West, Yishun and Bukit Batok</strong> have large working-age populations but below-average income levels. These areas generate consistent dining frequency but are price-sensitive. High-volume, affordable concepts with strong value propositions are better positioned here than premium formats.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Tanglin, Bukit Timah, Novena, Bishan and Marine Parade</strong> are wealthy but have slightly lower working-age proportions. Demand here is quality-driven rather than frequency-driven. Premium restaurants, specialty cafes and destination dining concepts perform well, though operators should expect lower daily footfall compared to prime locations.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Outram, Ang Mo Kio, Geylang, Toa Payoh, Bukit Merah and Kallang</strong> fall below average on both dimensions. These are typically mature estates with older populations and moderate income levels. While established hawker stalls and coffee shops can still thrive here on neighbourhood loyalty and repeat patronage, new entrants face a more challenging demand environment and should enter only with a clear competitive advantage.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableauPlaceholder' id='viz1775067704741' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='Dwelling Type by Planning Area ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;DwellingTypebyPlanningArea&#47;1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+              <param name='embed_code_version' value='3' /> 
+              <param name='site_root' value='' />
+              <param name='name' value='demand_17750618803560&#47;DwellingTypebyPlanningArea' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;de&#47;demand_17750618803560&#47;DwellingTypebyPlanningArea&#47;1.png' /> 
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-GB' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+        </div>
+        <p class="embed-caption">Dwelling type is a reliable proxy for household wealth and lifestyle, directly influencing F&B spending behaviour and concept suitability.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>River Valley, Downtown Core, Pasir Ris, Punggol, Sengkang and Choa Chu Kang</strong> are almost entirely private housing. Residents here are accustomed to higher spending and expect quality dining experiences. Premium restaurants, specialty cafes and concept dining are well-positioned in these areas.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Outram , Woodlands , Jurong West and Jurong East</strong> are overwhelmingly public housing areas. These locations have large household volumes but are price-sensitive. High-volume, affordable concepts with strong value propositions perform best.</p>
+        </div>
+        <div class="insight-card">
+            <p><strong>Novena and Clementi</strong> show a meaningful mix of both private and public housing, making them versatile locations where mid-range concepts can attract both segments simultaneously.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUPPLY PANEL -->
+    <div class="dash-panel" id="panel-supply">
+      <div class="panel-header">
+        <span class="panel-badge" style="background:var(--teal-dim);color:var(--teal)">🏘️ Neighbourhood Demographics</span>
+        <div class="panel-header-decoration"></div>
+      </div>
+      <p class="panel-desc">Finding the right location can make or break an F&B business. Our tool helps food vendors analyse supply trends across 29 planning areas in Singapore, showing where competition is concentrated and where opportunities exist based on your F&B type, so you can choose locations with higher potential. Demand is equally important, and our tool helps you identify areas with stronger spending power and more working adults who are likely to dine out.</p>
+      
+      <div class="viz-card">
+        <div class="tableau-embed" style="margin-bottom:0"><div class="te-icon">🗺️</div><div class="te-label">F&B Supply Distribution · Embed Tableau Sheet 1 here</div></div>
+        <p class="embed-caption">This map reflects absolute supply concentration rather than unmet demand, so high-density areas should be interpreted as high competition zones rather than immediate opportunities.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p>F&B supply is heavily concentrated in <strong> central and mature planning areas</strong> such as <strong> Downtown Core, Geylang and Bedok</strong>. These locations are already highly competitive. Entering these areas requires a clear edge. These locations are better suited for differentiated niche concepts for novelty or strong operators with competitive pricing, branding or product quality.</p>
+        </div>
+        <div class="insight-card">
+            <p>In contrast, areas with smaller supply clusters indicate relatively lower competition. These locations may present more accessible entry points for new vendors, particularly those looking to capture neighbourhood demand without facing heavy direct competition.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed" style="margin-bottom:0"><div class="te-icon">🗺️</div><div class="te-label">F&B Type Contribution · Embed Tableau Sheet 2 here</div></div>
+        <p class="embed-caption">F&B concentration varies significantly by type across planning areas. Different locations favour different concepts rather than a one-size-fits-all strategy.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+          <h4>Preference for Diversity and High Traffic: </h4>
+          <p>Areas such as <strong>Downtown Core and Geylang</strong> show strong concentration across <strong>multiple F&B types</strong>, indicating <strong>high diversity</strong>. These are central business districts, where mixed-use developments and concentrated commercial activity create environments that support a wide range of food and beverage options <a href="https://www.linkedin.com/pulse/singapore-cbd-food-beverages-market-risk-size-supply-chain-fubzf/" target="_blank" style="color: var(--rust); text-decoration: none; border-bottom: 1px dashed;">(URA, 2025)</a>. While these locations can accommodate many concepts, do note competition is also broad and intense.</p>
+        </div>
+
+        <div class="insight-card">
+          <h4>Preference for Industrial Canteens: </h4>
+          <p><strong>Industrial Estates</strong> located in <strong>Woodlands, Serangoon, Toa Payoh, Geylang</strong> see the most active crowds at Industrial canteens. These locations can be suitable for vendors targeting weekday morning to afternoon demand.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed" style="margin-bottom:0"><div class="te-icon">🗺️</div><div class="te-label">CS vs HC · Embed Tableau Sheet 3 here</div></div>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p>Bukit Merah, Geylang, Bedok, Outram and Kallang show the highest concentration of combined Coffee Shop (CS) and Hawker Centre (HC), indicating strong and proven demand in these areas.</p>
+        </div>
+
+        <div class="insight-card">
+            <p>For <strong>coffee shops (CS)</strong>, Bukit Merah leads, followed by Outram and Kallang. For <strong>hawker centres (HC)</strong>, Geylang has the highest stall concentration.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Choosing between Coffee Shop and Hawker Centre</h4>
+          <p>Choose <strong>Coffee Shop (CS)</strong> if you prioritise <strong>stable, repeat customers and lower operational risk.</strong> Choose <strong>Hawker Centre (HC)</strong> if you prioritise <strong>high footfall and volume, and can compete in a denser environment</strong>.</p>
+        </div>
+
+        <div class="insight-card">
+          <h4>Choosing between High vs Low Supply Areas</h4>
+          <p>Enter high-supply areas (e.g. Bukit Merah for CS, Geylang for HC) if you want proven demand and are confident in competing. Otherwise, consider lower-supply areas to capture untapped demand with less competition.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COST PANEL -->
+    <div class="dash-panel" id="panel-cost">
+      <div class="panel-header">
+        <span class="panel-badge" style="background:var(--gold-dim);color:var(--gold)">💰 Operational Costs</span>
+        <div class="panel-header-decoration"></div>
+      </div>
+      <p class="panel-desc">Rental cost is one of the most significant operational pressures for F&amp;B businesses. This dashboard shows average median retail rental rates across planning areas and tracks how they have evolved — so you can assess current affordability and longer-term cost risk.</p>
+      
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableau-lazy' data-url='https://public.tableau.com/views/RentalCostsbyPlanningAreawrtQuarters/RentalCostsbyPlanningAreawrtQuarters?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+        <p class="embed-caption">Rental cost is one of the most significant operational pressures for F&B businesses. The choropleth map above shows the average median retail rental rate (SGD per sqm per month) across planning areas, based on URA commercial rental data. Areas shaded in deeper red carry higher rental costs, while gold/yellow areas are more affordable. Users can filter by a specific quarter to see current conditions, or select all quarters for a broader historical comparison.</p>
+        <div class="note-box">
+          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--muted); font-style: italic; margin: 0;">
+            <strong>Note:</strong> These figures are based on reported URA retail rental transactions and may not capture the full range of F&B-specific rental costs in each area. Planning areas with fewer reported streets (e.g. 1–2 streets) may show more volatile averages — cross-reference with the rental trend chart before drawing conclusions.
+          </p>
+        </div>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>Higher-cost areas</strong> in the most recent quarters include <strong>Punggol, Jurong West, Sengkang, and Choa Chu Kang</strong> — reflecting the presence of large regional commercial developments and newer retail spaces in these towns which command higher per-sqm rates.</p>  
+        </div>
+        <div class="insight-card">
+            <p><strong>More affordable areas</strong> include <strong>Outram, Geylang, Kallang, and Clementi</strong>, as well as central planning areas like <strong>Downtown Core</strong> — suggesting that older or more fragmented retail stock in these areas may be priced more modestly despite their prime locations.</p>  
+        </div>
+        <div class="insight-card">
+            <p>The <strong>quarter filter</strong> allows users to examine rental conditions at a specific point in time. Selecting a single recent quarter such as <strong>2025Q4</strong> gives the most current picture, while selecting all quarters averages across the full historical range.</p>  
+        </div>
+      </div>
+      
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+            <div class='tableau-lazy' data-url='https://public.tableau.com/views/RentalTrendsbyPlanningArea/RentalTrendsbyPlanningArea?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+
+        <p class="embed-caption">While the choropleth captures a snapshot, the time-series chart above reveals how rental costs have evolved as time passed. This is critical for understanding whether an area is becoming more or less expensive over time, not just what it costs today. Also, you can see if an area has relatively stable rental costs or experienced shocks in rental costs, which are generally undesirable for businesses.</p>
+        <div class="note-box">
+          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--muted); font-style: italic; margin: 0;">
+            <strong>Tip for user:</strong> Before committing to a location, check its rental trend over at least 6–8 quarters. An affordable area today may not stay affordable. A volatile trend is a risk signal regardless of the current absolute price.
+          </p>
+        </div>
+      </div>  <!-- ✅ closes .viz-card -->
+
+      <p style="margin-bottom: 16px; line-height: 1.5;">Users can select up to a few planning areas simultaneously using the filter to compare their rental trajectories. Key patterns to look for:</p>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+          <p><strong>Steady upward trends</strong> suggest a market that is consistently appreciating — entry now may be cheaper than entry in a year's time, but also signals sustained cost pressure.</p>
+        </div>
+        <div class="insight-card">
+          <p><strong>Irregular spikes</strong> (such as the one shown for Pasir Ris above) may indicate data anomalies, short-term demand shocks, or one-off premium transactions — these areas may carry higher rental volatility risk.</p>
+        </div>
+        <div class="insight-card">
+          <p><strong>Stable or declining trends</strong> may present an opportunity if demand conditions in that area remain strong — lower rents in an otherwise viable catchment.</p>
+        </div>
+      </div>
+    </div><!-- closes #panel-cost -->
+
+    <!-- ACCESSIBILITY PANEL -->
+    <div class="dash-panel" id="panel-access">
+      <div class="panel-header">
+        <span class="panel-badge" style="background:var(--slate-dim);color:var(--slate)">🚇 Accessibility</span>
+        <div class="panel-header-decoration"></div>
+      </div>
+      <p class="panel-desc">A location's reach depends on how easily customers can get there. This dashboard maps the Composite Accessibility Score (average MRT exits + bus stops within 500m) at both planning-area and establishment level.</p>
+      
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableau-lazy' data-url='https://public.tableau.com/views/AccessibilitybyPlanningArea/AccessibilitybyPlanningArea?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+        <p class="embed-caption">The choropleth map above provides a nationwide view of public transport accessibility across Singapore's planning areas. Each area is shaded by its Composite Accessibility Score, which is the average number of MRT exits and bus stops within 500m of existing F&B establishments in that area. We chose 500m as the standard for accessibility as that is the number that is the “Golden Standard”. This gives aspiring F&B owners a quick first filter: which areas are generally well-served by public transport, and which are comparatively isolated. Areas with darker shading have higher combined MRT and bus accessibility, making them easier for customers to reach without a car.</p>
+      </div>
+      <p style="margin-bottom: 16px; line-height: 1.5;">Users can select up to a few planning areas simultaneously using the filter to compare their rental trajectories. Key patterns to look for:</p>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p><strong>High accessibility areas</strong> (darker shading) such as Downtown Core and Outram benefit from dense MRT and bus networks — customers can reach these areas conveniently from across Singapore.</p>  
+        </div>
+        <div class="insight-card">
+            <p><strong>Lower accessibility areas</strong>  (lighter shading) such as Bukit Timah and Tanglin have fewer nearby transport nodes, which may limit walk-in traffic from non-drivers.</p>  
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableau-lazy' data-url='https://public.tableau.com/views/AccessibilityofSpecificEstablishments/AccessibilityofSpecificEstablishments?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+        <p class="embed-caption">For a more granular perspective, this visualisation allows you to zoom into individual existing establishments and see the specific MRT exits and bus stops within 500m of that specific location. Points are colour-coded by transport type — grey for the selected establishment, blue for nearby bus stops, and yellow for nearby MRT exits. This view is particularly valuable for comparing specific streets or clusters within a planning area, rather than relying on area-wide averages alone. Two establishments in the same planning area may have very different accessibility profiles depending on their exact address.</p>
+      </div>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+            <p>Ability to use the <strong>Licensee Name filter</strong> to select a specific establishment and see its surrounding transport infrastructure.</p>  
+        </div>
+        <div class="insight-card">
+            <p>The <strong>number of nearby stops</strong> shown generally complements the area-level score. However, a high area score but few stops near your specific target address is not entirely impossible and is definitely a red flag worth investigating.</p>
+        </div>
+      </div>
+
+      <div class="viz-card">
+        <div class="tableau-embed tableau-live" style="margin-bottom:0">
+          <div class='tableau-lazy' data-url='https://public.tableau.com/views/AccessibilityvsRentalCostAnalysis/AccessibilityvsRentalCostAnalysis?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+        <p class="embed-caption">The scatter plot below synthesises both dimensions, rental cost (x-axis) and composite accessibility score (y-axis), into a single view. Each dot represents one planning area, coloured by region. Reference lines mark the average rent and average accessibility across all areas, dividing the chart into four quadrants.</p>
+        <div class="note-box">
+          <p style="font-size: 0.85rem; line-height: 1.5; color: var(--muted); font-style: italic; margin: 0;">
+            <strong>How to use this view:</strong> Use the quarter filter to check whether your shortlisted areas remain in the same quadrant over time, or whether they are drifting toward higher costs. A planning area moving rightward across quarters is experiencing rental appreciation — factor this into your longer-term cost projections.
+          </p>
+        </div>
+      </div>
+      <p style="margin-bottom: 16px; line-height: 1.5;">The top-left quadrant represents the most attractive combination: high accessibility and low rental cost. The quadrants can be interpreted as follows:</p>
+      <div class="insight-grid" style="margin-bottom:50px">
+        <div class="insight-card">
+          <h4>Top-left (High Accessibility, Low Rent): </h4>
+          <p>The sweet spot for new F&B entrants — good transport connectivity without prohibitive rental costs. Prioritise exploring areas in this quadrant.</p>
+        </div>
+
+        <div class="insight-card">
+          <h4>Top-right (High Accessibility, High Rent): </h4>
+          <p>Commercially active and well-connected, but expensive. Suitable for operators with strong revenue models or premium concepts that can justify the cost.</p>
+        </div>
+
+        <div class="insight-card">
+          <h4>Bottom-left (Low Accessibility, Low Rent): </h4>
+          <p>Affordable, but may struggle to attract spontaneous foot traffic. More viable for delivery-first or destination concepts.</p>
+        </div>
+
+        <div class="insight-card">
+          <h4>Bottom-right (Low Accessibility, High Rent): </h4>
+          <p>The least favourable combination — high cost with limited transport reach. Generally to be avoided unless there are strong specific reasons (e.g. captive audience, anchor tenant proximity).</p>
+        </div>
+      </div>
+      <p style="margin-bottom: 50px; line-height: 1.7;">
+        An important observation from the current data: the relationship between accessibility and rent in Singapore is not straightforward. Newer regional towns such as <strong>Punggol, Sengkang, and Jurong West</strong> combine relatively high accessibility with high rental costs — driven by modern mall developments rather than centrality. Meanwhile, central areas like <strong>Downtown Core and Outram</strong> are surprisingly affordable on a per-sqm basis despite strong transport connectivity, potentially offering genuine sweet-spot opportunities. This underscores the importance of using this scatter plot rather than relying on assumptions about which areas are expensive.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="combined">
+  <div class="combined-inner page">
+    <div class="section-eyebrow">Market View</div>
+    <h2>Find the right location.<br>Reduce risk. Maximise success.</h2>
+    <p style="color:var(--muted);max-width:620px;margin-top:8px;font-size:14px;line-height:1.65">Opening an F&amp;B outlet is not just about finding foot traffic. It is about choosing a location where customer demand, competition, accessibility, and neighborhood profile work in your favour. We will now bring those factors together into one decision-support view, so you can move beyond guesswork and assess locations more confidently.</p>
+    
+    <!-- Combined View Tabs -->
+    <div class="combined-tabs" style="display: flex; gap: 12px; margin: 32px 0 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+      <button class="combined-tab active" onclick="showCombinedPanel('demand-supply', this)" style="background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; padding: 8px 16px; cursor: pointer; color: var(--ink); border-radius: var(--r); transition: all var(--t);">📊 Demand–Supply</button>
+      <button class="combined-tab" onclick="showCombinedPanel('cost-access', this)" style="background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; padding: 8px 16px; cursor: pointer; color: var(--muted); border-radius: var(--r); transition: all var(--t);">💰 Cost–Accessibility</button>
+    </div>
+    
+    <!-- Combined Panel: Demand-Supply -->
+    <div class="combined-panel active" id="panel-demand-supply">
+      
+      <!-- Market Overview Dashboard (Above) -->
+      <div style="margin-bottom: 60px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 16px;">Where are the best opportunities?</h2>
+        <div class="tableau-embed" style="margin-bottom: 24px; min-height: 450px;">
+          <div class="te-icon">🗺️</div>
+          <div class="te-label">Main Dashboard · Demand-Supply Gap Map · Embed Tableau Sheet here</div>
+        </div>
+        <div>
+          <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">Using the demand-focused and supply-focused analyses together, this dashboard provides a <strong>nationwide view of F&amp;B opportunity</strong> through a single interpretable measure: the <strong>demand-supply gap</strong>.</p>
+          <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">Instead of looking at demand or competition in isolation, the dashboard highlights where meaningful imbalances exist:</p>
+          <ul style="color: var(--muted); line-height: 1.7; margin-left: 20px;">
+            <li><strong>Underserved areas</strong> suggest potential for new entrants.</li>
+            <li><strong>Balanced areas</strong> may offer stable but competitive conditions.</li>
+            <li><strong>Oversaturated areas</strong> signal higher entry risk because supply already exceeds local opportunity.</li>
+          </ul>
+          <p style="color: var(--muted); line-height: 1.7; margin-top: 20px;">With the map and ranking views, users can quickly narrow down which neighbourhoods are worth exploring further. This platform simplifies complex market data into clear, actionable guidance, helping YOU <strong>identify opportunities, evaluate competition,</strong> and make more <strong>confident</strong> location <strong>decisions</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Demand-Supply Positioning (Above) -->
+      <div style="margin-bottom: 60px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 16px;">Demand-Supply Positioning: How competitive is each area?</h2>
+        <div class="tableau-embed" style="margin-bottom: 24px; min-height: 450px;">
+          <div class="te-icon">📊</div>
+          <div class="te-label">Demand-Supply Scatterplot · Embed Tableau Sheet here</div>
+        </div>
+        <div>
+          <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">To support deeper decision-making, the scatter plot compares demand conditions (Demand Index) against existing supply (Supply Index) across planning areas. This helps to evaluate each location based on relative market positioning:</p>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0;">
+            <div style="padding: 12px; background: var(--rust-dim); border-radius: var(--r);">
+              <strong style="color: var(--rust);">Top Right</strong>
+              <p style="font-size: 12px; margin-top: 4px;">High demand, high supply → competitive but still commercially active</p>
+            </div>
+            <div style="padding: 12px; background: var(--rust-dim); border-radius: var(--r);">
+              <strong style="color: var(--rust);">Top Left</strong>
+              <p style="font-size: 12px; margin-top: 4px;">Low demand, high supply → too competitive, higher risk</p>
+            </div>
+            <div style="padding: 12px; background: var(--teal-dim); border-radius: var(--r);">
+              <strong style="color: var(--teal);">Bottom Right</strong>
+              <p style="font-size: 12px; margin-top: 4px;">High demand, low supply → strongest opportunity</p>
+            </div>
+            <div style="padding: 12px; background: var(--gold-dim); border-radius: var(--r);">
+              <strong style="color: var(--gold);">Bottom Left</strong>
+              <p style="font-size: 12px; margin-top: 4px;">Low demand, low supply → weaker market conditions overall</p>
+            </div>
+          </div>
+          <p style="color: var(--muted); line-height: 1.7; font-style: italic;">A neighbourhood may have demand, but still be difficult to enter if the market is already crowded. The scatter plot helps users judge not only whether customers are present, but whether their business can realistically compete here.</p>
+        </div>
+      </div>
+
+      <!-- Key Insights and Observations -->
+      <div style="margin-bottom: 60px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 24px;">Key insights and observations</h2>
+        <div class="insight-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="insight-card">
+            <p>Central areas, such as <strong>Downtown Core</strong>, tend to remain commercially intense because the district covers the CBD, Marina Bay and surrounding prime office areas, with a critical mass of office, hotel, retail and complementary mixed uses. That makes it attractive in absolute terms, but also structurally competitive. <a href="https://www.ura.gov.sg/Corporate/Guidelines/Urban-Design/Downtown-Core/Downtown-Core-Planning-Area" target="_blank" style="color: var(--rust); text-decoration: none; border-bottom: 1px dashed;">URA's guidance</a> also shows that the area is being shaped as a denser mixed-use, round-the-clock district rather than a simple neighbourhood catchment, which reinforces the likelihood of intense competition.</p>
+          </div>
+          <div class="insight-card">
+            <p>This suggests that while Downtown Core remains economically active, the supply intensity is disproportionately high relative to household-driven demand proxies, resulting in a structurally competitive environment. In statistical terms, these areas are characterised by high normalised supply density, high competition clustering, and negative gap values. This reinforces the interpretation that demand in such areas may be driven by non-residential populations (e.g. working population), which are not fully captured by household-based demand metrics in the model.</p>
+          </div>
+          <div class="insight-card">
+            <p>Some city-fringe and residential planning areas, such as <strong>Outram</strong>, present more balanced conditions, offering more sustainable entry opportunities. Demand and Supply indices are closer in magnitude, resulting in gap values that are moderately negative. This indicates that supply levels are more proportionate to measured demand, suggesting a more stable competitive environment compared to highly saturated central districts.</p>
+          </div>
+          <div class="insight-card">
+            <p>However, Outram's relatively lower Demand Index (compared to high-performing residential areas) also explains why it does not emerge as a strong opportunity zone despite its central location.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Support -->
+      <div style="margin-bottom: 60px; background: var(--cream); padding: 40px; border-radius: var(--r);">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 16px;">Decision Support</h2>
+        <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">Please note that this platform is designed to support exploration and comparison, not to push users toward one rigid "best" answer.</p>
+        <p style="color: var(--muted); line-height: 1.7; margin-bottom: 12px;">You can use it to:</p>
+        <ul style="color: var(--muted); line-height: 1.7; margin-left: 20px; margin-bottom: 20px;">
+          <li>Compare multiple planning areas</li>
+          <li>Evaluate trade-offs between demand and competition</li>
+          <li>Identify locations aligned with your business model and budget</li>
+          <li>Explore neighbourhood demographics before making a decision</li>
+        </ul>
+        <p style="color: var(--muted); line-height: 1.7; font-style: italic; border-left: 3px solid var(--rust); padding-left: 20px;"><strong>You know your business best!</strong> A kiosk, cafe, family restaurant, and premium concept will not all thrive in the same place. This tool is meant to sharpen judgement, not replace it.</p>
+      </div>
+
+      <!-- Recommended Focus Areas -->
+      <div style="margin-bottom: 60px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 24px;">Recommended Focus Areas - Where are the strongest and weakest opportunities?</h2>
+        
+        <div style="margin-bottom: 32px;">
+          <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--teal); margin-bottom: 16px;">✨ Stronger Opportunities</h3>
+          <div class="insight-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="insight-card">
+              <h4>Bedok</h4>
+              <p>Bedok is worth attention because it is a large, mature eastern town with established amenities and strong residential catchment. Bedok is attractive for concepts that benefit from recurring local demand rather than one-off destination traffic.</p>
+            </div>
+            <div class="insight-card">
+              <h4>Tampines</h4>
+              <p>Tampines is one of the strongest practical candidates because HDB identifies it as a regional centre, and one of the most developed ones in Singapore. Its town centre includes major malls, office buildings, transport nodes and civic amenities, which means demand is supported by both residents and non-residents. <a href="https://www.hdb.gov.sg/about-us/our-towns-and-estates/tampines" target="_blank" style="color: var(--rust); text-decoration: none; border-bottom: 1px dashed;">Learn more →</a></p>
+            </div>
+          </div>
+        <p style="color: var(--muted); line-height: 1.7; margin-top: 20px;">These areas typically exhibit strong underlying demand conditions, lower relative competition, and balanced demographic profiles. The trade-off is that higher activity usually also means higher expectations and stronger competition, so the opportunity is likely best for operators with a clear target segment and differentiated offering.</p>
+
+        </div>
+
+        <div>
+          <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--rust); margin-bottom: 16px;">⚠️ Weaker Opportunities</h3>
+          <div class="insight-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="insight-card">
+              <h4>Downtown Core</h4>
+              <p>Downtown Core should be approached carefully. It is Singapore's global financial district and includes a heavy concentration of prime office space, hotels, retail and mixed-use development. That can create strong demand, but it also raises the bar for entry because competition, rents, and customer expectations are typically much higher. For many small and mid-sized F&amp;B operators, this means the area may be commercially active yet still difficult to enter profitably without a strong niche or differentiated value proposition. <a href="https://www.ura.gov.sg/Corporate/Guidelines/Urban-Design/Downtown-Core/Downtown-Core-Planning-Area" target="_blank" style="color: var(--rust); text-decoration: none; border-bottom: 1px dashed;">URA reference →</a></p>
+            </div>
+            <div class="insight-card">
+              <h4>Outram</h4>
+              <p>Outram is central and highly connected, but it is also unusual as a catchment. The area is heavily influenced by SGH, Outram Community Hospital, and the broader SGH Campus Masterplan, which make it a major healthcare node rather than a conventional neighbourhood consumption zone. That can benefit certain concepts, especially convenience-led, healthcare-adjacent or worker-oriented formats, but it may be less suitable for operators relying on broad residential lifestyle demand alone.</p>
+            </div>
+          </div>
+          <p style="color: var(--muted); line-height: 1.7; margin-top: 16px; font-size: 13px;"><em>Note: To open F&B outlets for specific demographics, please explore our visualisations to understand demographic trends in specific areas.</em></p>
+        </div>
+      </div>
+
+      <!-- Final Note -->
+      <div style="margin-bottom: 48px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 32px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 16px;">Final Note</h2>
+        <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">These recommendations should be read as starting points for decision-making, not absolute answers. A planning area that looks attractive overall may still be unsuitable for a specific concept, price point, or customer segment. Likewise, a lower-ranked area may still work well for a business designed around that local context.</p>
+        <p style="color: var(--muted); line-height: 1.7;">That is why this platform combines market opportunity, competitive positioning, and neighbourhood context, so users can move from broad screening to more grounded, business-specific judgement.</p>
+      </div>
+    </div>
+    
+    <!-- Combined Panel: Cost-Accessibility -->
+    <div class="combined-panel" id="panel-cost-access">
+
+      <!-- Main Dashboard (Above) -->
+      <div style="margin-bottom: 60px;">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 16px;">Accessibility &amp; Rental Cost Analysis</h2>
+        <div class="tableau-embed tableau-live" style="margin-bottom:24px; min-height:550px">
+          <div class='tableau-lazy' data-url='https://public.tableau.com/views/VAprojectObjective2/AccessibilityxRentalCostsAnalysis?:embed=y&:showVizHome=no&:toolbar=yes&:language=en-GB' style='position:relative;width:100%;padding-top:75%;background:#f5f5f0;'><div style='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;'>Loading chart…</div></div>
+        </div>
+        <div>
+          <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">The full dashboard brings all five visualisations into a single view, allowing users to move fluidly between area-level and establishment-level analysis without losing context. Rather than examining accessibility and rental costs in separate silos, the dashboard is designed to support a natural decision-making flow:</p>
+          <ul style="color: var(--muted); line-height: 1.7; margin-left: 20px; margin-bottom: 20px;">
+            <li>A user might begin with the <strong>Accessibility by Planning Area</strong> and <strong>Rental Costs by Planning Area</strong> choropleths side by side, getting an immediate visual sense of which areas are well-connected and which are affordable.</li>
+            <li>From there, the <strong>Accessibility vs Rental Cost</strong> scatter plot consolidates both dimensions, making trade-offs explicit at a glance.</li>
+            <li>The <strong>Rental Trends</strong> chart then adds a time dimension, helping users verify whether a shortlisted area has been stable or volatile before committing.</li>
+            <li>Finally, the <strong>Accessibility of Specific Establishments</strong> drill-down allows users to move from area-level impressions to street-level reality, checking whether a specific target address actually benefits from the transport connectivity suggested by its planning area average.</li>
+          </ul>
+          <p style="color: var(--muted); line-height: 1.7; font-style: italic;">Used together, these views help users avoid two common pitfalls: choosing a location based on a single metric in isolation, and relying on area-wide averages that may not reflect conditions at a specific address.</p>
+        </div>
+      </div>
+
+
+      <!-- Final Note -->
+      <div style="margin-bottom: 48px; background: var(--cream); padding: 40px; border-radius: var(--r);">
+        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 16px;">Final Note</h2>
+        <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">The visualisations in this section are designed to support exploration and comparison, not to prescribe a single "best" location. A kiosk, a cafe, a family restaurant, and a premium concept will not all thrive in the same place — and the right trade-off between accessibility and cost depends heavily on your specific business model, target customer, and budget.</p>
+        <p style="color: var(--muted); line-height: 1.7; margin-bottom: 20px;">These views are useful to:</p>
+        <ul style="color: var(--muted); line-height: 1.7; margin-left: 20px; margin-bottom: 20px;">
+          <li>Narrow down planning areas that meet your accessibility and budget thresholds</li>
+          <li>Identify areas where rental costs have been stable and predictable</li>
+          <li>Avoid areas where supply already far exceeds local demand — even if rents appear low</li>
+        </ul>
+        <p style="color: var(--muted); line-height: 1.7; font-style: italic; border-left: 3px solid var(--rust); padding-left: 20px;">For a fuller picture, combine these findings with the Demand-Supply Analysis dashboard to assess whether the customer base in your shortlisted areas matches your concept.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="reco-cta">
+  <h2>Looking for more tailored recommendations?</h2>
+  <p>Our recommender applies the decision tree — Cost → Demand → Accessibility → Competitiveness — to rank planning areas for your specific F&amp;B concept and budget.</p>
+  <a class="btn btn-primary" href="/recommender" style="margin:0 auto;display:inline-flex">Open the recommender →</a>
+</section>
+
+<footer>
+  <div class="footer-left">Data: NEA Establishments · Singapore Census · URA Rental Index &nbsp;|&nbsp; IS428 · AY2025/26</div>
+  <div class="footer-links"><a class="footer-link" href="/">Analysis</a><a class="footer-link" href="/recommender">Recommender</a></div>
+</footer>
+
+<script>
+  // ── Tableau <object> lazy-init (for the always-visible demand panel) ──────
+  var _tableauInited = {};
+  function initTableauInContainer(container) {
+    container.querySelectorAll('.tableauPlaceholder').forEach(function(div) {
+      var id = div.id;
+      if (_tableauInited[id]) return;
+      var width = div.offsetWidth;
+      if (width === 0) return;
+      var obj = div.getElementsByTagName('object')[0];
+      if (!obj) return;
+      obj.style.width  = '100%';
+      obj.style.height = (width * 0.75) + 'px';
+      _tableauInited[id] = true;
+      if (!document.querySelector('script[src*="viz_v1.js"]')) {
+        var s = document.createElement('script');
+        s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        document.body.appendChild(s);
+      } else {
+        obj.style.display = '';
+      }
+    });
+  }
+
+  // ── Lazy iframe injection (for hidden panels — avoids zero-dimension render) ──
+  function injectTableauIframes(container) {
+    container.querySelectorAll('.tableau-lazy').forEach(function(div) {
+      if (div.querySelector('iframe')) return; // already injected
+      var url = div.getAttribute('data-url');
+      if (!url) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+      // Remove the "Loading…" placeholder text
+      div.innerHTML = '';
+      div.appendChild(iframe);
+    });
+  }
+
+  // ── Panel switching (dashboards section) ─────────────────────────────────
+  function showPanel(id, card) {
+    document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.factor-card').forEach(c => c.classList.remove('active'));
+    var panel = document.getElementById('panel-' + id);
+    panel.classList.add('active');
+    card.classList.add('active');
+    document.getElementById('dashboards').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() {
+      initTableauInContainer(panel);
+      injectTableauIframes(panel);
+    }, 200);
+  }
+
+  // ── Combined-view tab switching (market view section) ────────────────────
+  function showCombinedPanel(panelId, element) {
+    document.querySelectorAll('.combined-panel').forEach(p => p.classList.remove('active'));
+    var activePanel = document.getElementById('panel-' + panelId);
+    if (activePanel) {
+      activePanel.classList.add('active');
+      setTimeout(function() {
+        initTableauInContainer(activePanel);
+        injectTableauIframes(activePanel);
+      }, 200);
+    }
+    document.querySelectorAll('.combined-tab').forEach(function(tab) {
+      tab.classList.remove('active');
+      tab.style.color = 'var(--muted)';
+      tab.style.background = 'none';
+    });
+    if (element) {
+      element.classList.add('active');
+      element.style.color = 'var(--rust)';
+      element.style.background = 'var(--rust-dim)';
+    }
+  }
+
+  // ── On page load: init only the panels that start visible ────────────────
+  document.addEventListener('DOMContentLoaded', function() {
+    var activePanel = document.querySelector('.dash-panel.active');
+    if (activePanel) initTableauInContainer(activePanel);
+    var activeCombined = document.querySelector('.combined-panel.active');
+    if (activeCombined) initTableauInContainer(activeCombined);
+  });
+  fetch('/api/overview_stats').then(r=>r.json()).then(d=>{
+    const el=id=>document.getElementById(id);
+    if(el('stat-estab'))el('stat-estab').textContent=d.total_establishments.toLocaleString();
+    if(el('stat-areas'))el('stat-areas').textContent=d.planning_areas;
+    if(el('stat-demand-area'))el('stat-demand-area').textContent=d.highest_demand_area;
+  }).catch(()=>{});
+</script>
+</body>
+</html>

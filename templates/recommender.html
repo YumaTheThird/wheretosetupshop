@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Where to Set Up Shop — Location Recommender</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/shared.css"/>
+  <style>
+    /* ── RECOMMENDER HEADER ───────────────────────────────────────── */
+    .reco-header {
+      background: var(--ink); color: var(--paper); padding: 0 5vw; overflow: hidden;
+    }
+    .reco-header-inner {
+      max-width: 1140px; margin: 0 auto; padding: 52px 0 44px; position: relative; z-index: 1;
+    }
+    .reco-header::after {
+      content: ''; position: absolute; right: -80px; top: -60px;
+      width: 380px; height: 380px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(201,79,42,.18) 0%, transparent 70%);
+    }
+    .reco-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--rust-lt); margin-bottom: 16px;
+    }
+    .reco-eyebrow::before { content: ''; width: 24px; height: 1.5px; background: var(--rust-lt); }
+    .reco-header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 10px; }
+    .reco-header p { color: rgba(245,240,232,.55); font-size: 14px; max-width: 500px; }
+    .tree-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .tree-pill {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px; padding: 5px 14px 5px 10px; font-size: 12px; font-weight: 500;
+    }
+    .tree-pill .num {
+      width: 18px; height: 18px; border-radius: 50%; display: inline-flex;
+      align-items: center; justify-content: center; font-size: 10px;
+      font-family: 'DM Mono', monospace;
+    }
+    .pill-1 .num { background: rgba(201,79,42,.25); color: var(--rust-lt); }
+    .pill-2 .num { background: rgba(26,107,94,.25); color: #2a9b88; }
+    .pill-3 .num { background: rgba(201,134,10,.25); color: var(--gold); }
+    .pill-4 .num { background: rgba(255,255,255,.1); color: #b0a898; }
+
+    /* ── LAYOUT ───────────────────────────────────────────────────── */
+    .reco-body { max-width: 1140px; margin: 0 auto; padding: 36px 5vw 80px; position: relative; z-index: 1; }
+    .reco-layout { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
+    @media(max-width:800px){ .reco-layout { grid-template-columns: 1fr; } }
+
+    /* ── FILTER PANEL ─────────────────────────────────────────────── */
+    .filter-panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 28px; box-shadow: var(--shadow-sm); position: sticky; top: 78px;
+    }
+    .panel-title {
+      font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .panel-title .icon {
+      width: 28px; height: 28px; background: var(--rust); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .field select, .field input[type="number"] {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+      background: var(--paper); font-family: 'DM Sans', sans-serif; font-size: 14px;
+      color: var(--ink); appearance: none;
+      transition: border-color var(--t), box-shadow var(--t); outline: none;
+    }
+    .field select:focus, .field input[type="number"]:focus {
+      border-color: var(--rust); box-shadow: 0 0 0 3px rgba(201,79,42,.12);
+    }
+    .rent-range { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .rent-range input { text-align: center; }
+    .rent-hint { font-size: 11px; color: var(--muted); margin-top: 5px; font-family: 'DM Mono', monospace; }
+    .stepper { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--paper); }
+    .stepper button { width: 38px; height: 38px; border: none; background: transparent; font-size: 18px; cursor: pointer; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: background var(--t), color var(--t); }
+    .stepper button:hover { background: var(--cream); color: var(--ink); }
+    .stepper span { flex: 1; text-align: center; font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; }
+    .btn-search {
+      width: 100%; padding: 13px 20px; background: var(--ink); color: var(--paper);
+      border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 600; letter-spacing: .04em; cursor: pointer; margin-top: 8px;
+      transition: background var(--t), transform var(--t);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-search:hover { background: var(--rust); transform: translateY(-1px); }
+    .btn-search:active { transform: none; }
+    .btn-search svg { transition: transform var(--t); }
+    .btn-search:hover svg { transform: translateX(3px); }
+
+    /* ── RESULTS ──────────────────────────────────────────────────── */
+    .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+    .results-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; }
+    .results-meta { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+    .state-box { text-align: center; padding: 64px 24px; color: var(--muted); }
+    .state-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+    .state-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 8px; }
+    .state-box p { font-size: 14px; }
+
+    /* ── CARDS ────────────────────────────────────────────────────── */
+    .cards { display: flex; flex-direction: column; gap: 20px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow var(--t), transform var(--t); animation: fadeUp .35s ease both; }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+    .card-head { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); cursor: pointer; }
+    .rank-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+    .rank-badge.rank-1 { background: var(--rust); }
+    .rank-badge.rank-2 { background: var(--teal); }
+    .rank-badge.rank-3 { background: var(--gold); }
+    .card-name-block { flex: 1; min-width: 0; }
+    .card-name { font-family: 'DM Serif Display', serif; font-size: 1.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-region { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+    .overall-score { flex-shrink: 0; text-align: right; }
+    .score-big { font-family: 'DM Serif Display', serif; font-size: 1.7rem; line-height: 1; color: var(--rust); }
+    .score-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .card-chevron { flex-shrink: 0; width: 20px; height: 20px; color: var(--muted); transition: transform var(--t); }
+    .card.open .card-chevron { transform: rotate(180deg); }
+
+    .score-bars { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+    .score-bar-item { background: var(--card); padding: 14px 16px; }
+    .bar-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+    .bar-track { height: 4px; background: var(--cream); border-radius: 2px; overflow: hidden; margin-bottom: 5px; }
+    .bar-fill { height: 100%; border-radius: 2px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+    .bar-fill.cost { background: var(--rust); }
+    .bar-fill.demand { background: var(--teal); }
+    .bar-fill.access { background: var(--gold); }
+    .bar-fill.competition { background: #8a9e9b; }
+    .bar-value { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; }
+
+    .card-detail { display: none; padding: 20px 24px; border-top: 1px solid var(--border); background: var(--paper); }
+    .card.open .card-detail { display: block; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    @media(max-width:600px){ .detail-grid { grid-template-columns: 1fr; } }
+    .detail-section h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row .val { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; }
+    .stat-row .val.good { color: var(--teal); }
+    .stat-row .val.warn { color: var(--gold); }
+    .stat-row .val.bad { color: var(--rust); }
+
+    .demand-sub-bars { display: flex; flex-direction: column; gap: 8px; }
+    .sub-bar-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+    .sub-track { height: 3px; background: var(--cream); border-radius: 2px; overflow: hidden; }
+    .sub-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .6s .1s ease; }
+
+    .estab-list { display: flex; flex-direction: column; gap: 6px; }
+    .estab-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; background: var(--card); border: 1px solid var(--border); border-radius: 6px; font-size: 12px; }
+    .estab-icon { flex-shrink: 0; width: 22px; height: 22px; background: var(--cream); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .estab-name { font-weight: 500; color: var(--ink); }
+    .estab-addr { color: var(--muted); margin-top: 1px; }
+    .estab-type-badge { display: inline-block; margin-top: 3px; padding: 1px 7px; background: var(--cream); border-radius: 100px; font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
+    .type-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .type-chip { display: flex; align-items: center; gap: 5px; padding: 4px 10px; background: var(--cream); border-radius: 100px; font-size: 11px; }
+    .type-chip strong { font-family: 'DM Mono', monospace; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><div class="dot"></div>Where to Set Up Shop</a>
+    <div class="nav-links">
+      <a class="nav-link" href="/">Analysis</a>
+      <a class="nav-link active" href="/recommender">Recommender</a>
+    </div>
+  </div>
+</nav>
+
+<div class="reco-header">
+  <div class="reco-header-inner">
+    <div class="reco-eyebrow">Location Recommender</div>
+    <h1>Find your <em>ideal</em> F&amp;B location</h1>
+    <p>Decision-tree scoring across cost, demand, accessibility and competitiveness — powered by NEA and demographic data.</p>
+    <div class="tree-pills">
+      <div class="tree-pill pill-1"><span class="num">1</span> Cost</div>
+      <div class="tree-pill pill-2"><span class="num">2</span> Demand</div>
+      <div class="tree-pill pill-3"><span class="num">3</span> Accessibility</div>
+      <div class="tree-pill pill-4"><span class="num">4</span> Competitiveness</div>
+    </div>
+  </div>
+</div>
+
+<div class="reco-body">
+  <div class="reco-layout">
+    <aside class="filter-panel">
+      <div class="panel-title">
+        <div class="icon">
+          <svg width="14" height="14" fill="none" stroke="#f5f0e8" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4h18M7 12h10M11 20h2"/></svg>
+        </div>
+        Filters
+      </div>
+
+      <div class="field">
+        <label>Rental Cost (SGD / sqm / mo)</label>
+        <div class="rent-range">
+          <input type="number" id="min-rent" placeholder="Min" min="0" step="10" value="0"/>
+          <input type="number" id="max-rent" placeholder="Max" min="0" step="10"/>
+        </div>
+        <div class="rent-hint" id="rent-hint">Loading range…</div>
+      </div>
+
+      <div class="field">
+        <label>Type of F&amp;B</label>
+        <select id="fnb-type"><option value="">All types</option></select>
+      </div>
+
+      <div class="field">
+        <label>Region</label>
+        <select id="region"><option value="">All regions</option></select>
+      </div>
+
+      <div class="field">
+        <label>Number of results</label>
+        <div class="stepper">
+          <button onclick="stepN(-1)">−</button>
+          <span id="top-n-val">5</span>
+          <button onclick="stepN(1)">+</button>
+        </div>
+      </div>
+
+      <button class="btn-search" id="search-btn" onclick="runSearch()">
+        Find locations
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </aside>
+
+    <section>
+      <div class="results-header">
+        <h2 class="results-title">Recommendations</h2>
+        <span class="results-meta" id="results-meta"></span>
+      </div>
+      <div id="results-container">
+        <div class="state-box">
+          <span class="state-icon">🗺️</span>
+          <h3>Set your filters and search</h3>
+          <p>We'll rank Singapore's planning areas by cost, demand,<br>accessibility, and competitiveness.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">Data: NEA Establishments · Singapore Demographics · URA Rental Index</div>
+  <div class="footer-links">
+    <a class="footer-link" href="/">← Back to Analysis</a>
+    <a class="footer-link" href="/recommender">Recommender</a>
+  </div>
+</footer>
+
+<script>
+  const FNB_ICONS = {
+    'Cafe/Bistro (Shophouse)': '☕', 'Cafe/Restaurant (Mall)': '🍽️',
+    'Industrial Canteen': '🏭', 'Kiosk/Takeaway': '🥡',
+    'Other F&B': '🍴', 'CS': '🏪', 'HC': '🏨',
+  };
+  let topN = 5;
+
+  async function loadFilters() {
+    const data = await fetch('/api/filters').then(r=>r.json());
+    const mn = data.rent_range.min, mx = data.rent_range.max;
+    document.getElementById('rent-hint').textContent = `Dataset range: $${mn.toFixed(0)} – $${mx.toFixed(0)} / sqm / mo`;
+    document.getElementById('max-rent').value = mx.toFixed(0);
+    document.getElementById('max-rent').max = mx + 200;
+    const typeEl = document.getElementById('fnb-type');
+    data.fnb_types.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=(FNB_ICONS[t]||'📍')+'  '+t; typeEl.appendChild(o); });
+    const regionEl = document.getElementById('region');
+    data.regions.forEach(r => { const o=document.createElement('option'); o.value=r; o.textContent=r; regionEl.appendChild(o); });
+  }
+
+  function stepN(delta) {
+    topN = Math.max(1, Math.min(10, topN + delta));
+    document.getElementById('top-n-val').textContent = topN;
+  }
+
+  async function runSearch() {
+    const btn = document.getElementById('search-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner" style="width:18px;height:18px;margin:0;border-width:2px"></div> Searching…';
+    const params = new URLSearchParams({
+      min_rent: parseFloat(document.getElementById('min-rent').value)||0,
+      max_rent: parseFloat(document.getElementById('max-rent').value)||9999,
+      fnb_type: document.getElementById('fnb-type').value,
+      region:   document.getElementById('region').value,
+      top_n:    topN,
+    });
+    document.getElementById('results-meta').textContent = '';
+    document.getElementById('results-container').innerHTML = `<div class="state-box"><div class="spinner"></div><p>Scoring planning areas…</p></div>`;
+    try {
+      const data = await fetch(`/api/recommend?${params}`).then(r=>r.json());
+      renderResults(data);
+    } catch(e) {
+      document.getElementById('results-container').innerHTML = `<div class="state-box"><span class="state-icon">⚠️</span><h3>Something went wrong</h3><p>${e.message}</p></div>`;
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `Find locations <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+    }
+  }
+
+  function renderResults(data) {
+    const container = document.getElementById('results-container');
+    const meta = document.getElementById('results-meta');
+    if (!data.results || !data.results.length) {
+      meta.textContent = '';
+      container.innerHTML = `<div class="state-box"><span class="state-icon">🔍</span><h3>No areas matched</h3><p>${data.message||'Try widening your filters.'}</p></div>`;
+      return;
+    }
+    const f = data.filters_applied;
+    meta.textContent = `${data.results.length} areas · $${f.rent_range[0]}–$${f.rent_range[1]} · ${f.region==='all'?'all regions':f.region} · ${f.fnb_type==='all'?'all types':f.fnb_type}`;
+    container.innerHTML = `<div class="cards" id="cards-list"></div>`;
+    const list = document.getElementById('cards-list');
+    data.results.forEach((r,i) => { const c=buildCard(r,i+1); c.style.animationDelay=(i*0.06)+'s'; list.appendChild(c); });
+  }
+
+  function buildCard(r, rank) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const s = r.scores, d = r.demand_detail || {};
+    const estabHtml = (r.sample_locations||[]).length
+      ? r.sample_locations.map(e=>`<div class="estab-item"><div class="estab-icon">${FNB_ICONS[e.Type]||'📍'}</div><div><div class="estab-name">${e.licensee_name}</div><div class="estab-addr">${e.premises_address}</div><span class="estab-type-badge">${e.Type}</span></div></div>`).join('')
+      : `<p style="font-size:13px;color:var(--muted)">No establishments match the selected type in this area.</p>`;
+    const typeChips = r.type_breakdown
+      ? Object.entries(r.type_breakdown).sort((a,b)=>b[1]-a[1]).slice(0,5)
+          .map(([t,n])=>`<div class="type-chip">${FNB_ICONS[t]||'📍'} ${t} <strong>${n}</strong></div>`).join('')
+      : '';
+    card.innerHTML = `
+      <div class="card-head" onclick="toggleCard(this)">
+        <div class="rank-badge rank-${rank}">${rank}</div>
+        <div class="card-name-block">
+          <div class="card-name">${r.planning_area}</div>
+          <div class="card-region">${r.region} Region</div>
+        </div>
+        <div class="overall-score"><div class="score-big">${s.overall}</div><div class="score-label">Overall</div></div>
+        <svg class="card-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="score-bars">
+        ${bar('Cost',s.cost,'cost')}${bar('Demand',s.demand,'demand')}${bar('Accessibility',s.accessibility,'access')}${bar('Competition',s.competition,'competition')}
+      </div>
+      <div class="card-detail">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Area at a glance</h4>
+            <div class="stat-row"><span>Avg rent</span><span class="val">${r.avg_rent_psm?'$'+r.avg_rent_psm.toFixed(0)+' / sqm':'—'}</span></div>
+            <div class="stat-row"><span>Existing F&amp;B</span><span class="val ${r.num_competitors>1500?'bad':r.num_competitors>800?'warn':'good'}">${r.num_competitors.toLocaleString()}</span></div>
+            <div class="stat-row"><span>MRT exits (avg)</span><span class="val">${r.avg_mrt_exits||0}</span></div>
+            <div class="stat-row"><span>Bus stops (avg)</span><span class="val">${r.avg_bus_stops||0}</span></div>
+            ${r.fnb_count_filtered!=null?`<div class="stat-row"><span>Matching (filtered)</span><span class="val">${r.fnb_count_filtered.toLocaleString()}</span></div>`:''}
+          </div>
+          <div class="detail-section">
+            <h4>Demand breakdown</h4>
+            <div class="demand-sub-bars">
+              ${subbar('Income / spending power',d.income_score)}
+              ${subbar('Population / market size',d.population_score)}
+              ${subbar('Working-age cohort',d.working_age_score)}
+              ${subbar('Affluence (condo/landed)',d.affluence_score)}
+            </div>
+          </div>
+        </div>
+        ${typeChips?`<div class="detail-section" style="margin-bottom:16px"><h4 style="margin-bottom:10px">All F&amp;B types in this area</h4><div class="type-chips">${typeChips}</div></div>`:''}
+        <div class="detail-section"><h4 style="margin-bottom:10px">Sample establishments</h4><div class="estab-list">${estabHtml}</div></div>
+      </div>`;
+    return card;
+  }
+
+  function bar(label,score,cls){return`<div class="score-bar-item"><div class="bar-label">${label}</div><div class="bar-track"><div class="bar-fill ${cls}" style="width:${score}%"></div></div><div class="bar-value">${score}</div></div>`;}
+  function subbar(label,score){score=score||0;return`<div class="sub-bar"><div class="sub-bar-top"><span>${label}</span><span>${score.toFixed(0)}</span></div><div class="sub-track"><div class="sub-fill" style="width:${score}%"></div></div></div>`;}
+
+  function toggleCard(head) {
+    const card = head.closest('.card');
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+    if (!wasOpen) {
+      card.classList.add('open');
+      card.querySelectorAll('.bar-fill,.sub-fill').forEach(el=>{const w=el.style.width;el.style.width='0%';requestAnimationFrame(()=>{el.style.width=w;});});
+    }
+  }
+
+  document.addEventListener('keydown', e=>{ if(e.key==='Enter') runSearch(); });
+  loadFilters();
+</script>
+</body>
+</html>
