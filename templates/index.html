@@ -14,9 +14,9 @@
   <div class="nav-inner">
     <a class="nav-brand" href="/"><div class="dot"></div>Where to Set Up Shop</a>
     <div class="nav-links">
-      <a class="nav-link active" href="/">Analysis</a>
-      <a class="nav-link" href="#dashboards">Dashboards</a>
-      <a class="nav-link" href="#combined">Market View</a>
+      <a class="nav-link" href="/" id="nav-analysis">Analysis</a>
+      <a class="nav-link" href="#dashboards" id="nav-dashboards">Dashboards</a>
+      <a class="nav-link" href="#combined" id="nav-combined">Market View</a>
       <a class="nav-link cta" href="/recommender">→ Find My Location</a>
     </div>
   </div>
@@ -797,12 +797,63 @@
     var activeCombined = document.querySelector('.combined-panel.active');
     if (activeCombined) initTableauInContainer(activeCombined);
   });
-  fetch('/api/overview_stats').then(r=>r.json()).then(d=>{
-    const el=id=>document.getElementById(id);
-    if(el('stat-estab'))el('stat-estab').textContent=d.total_establishments.toLocaleString();
-    if(el('stat-areas'))el('stat-areas').textContent=d.planning_areas;
-    if(el('stat-demand-area'))el('stat-demand-area').textContent=d.highest_demand_area;
-  }).catch(()=>{});
+  // ── Scroll-spy: highlight nav link for visible section ───────────────────
+  (function() {
+    var navMap = [
+      { id: 'combined',   navId: 'nav-combined'   },
+      { id: 'dashboards', navId: 'nav-dashboards'  },
+    ];
+    // Analysis is the fallback when nothing else is active
+    var analysisLink = document.getElementById('nav-analysis');
+
+    function setActive(navId) {
+      document.querySelectorAll('.nav-link:not(.cta)').forEach(function(l) {
+        l.classList.remove('active');
+      });
+      var el = document.getElementById(navId);
+      if (el) el.classList.add('active');
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      // Find the topmost section that is currently intersecting
+      var visible = navMap.filter(function(m) {
+        var sec = document.getElementById(m.id);
+        if (!sec) return false;
+        var rect = sec.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.6 && rect.bottom > 0;
+      });
+
+      if (visible.length === 0) {
+        setActive('nav-analysis');
+      } else {
+        // Prefer the one whose section top is closest to (but above) viewport midpoint
+        var best = visible.reduce(function(a, b) {
+          var aTop = Math.abs(document.getElementById(a.id).getBoundingClientRect().top);
+          var bTop = Math.abs(document.getElementById(b.id).getBoundingClientRect().top);
+          return aTop < bTop ? a : b;
+        });
+        setActive(best.navId);
+      }
+    }, { threshold: [0, 0.1, 0.5], rootMargin: '0px 0px -40% 0px' });
+
+    navMap.forEach(function(m) {
+      var sec = document.getElementById(m.id);
+      if (sec) observer.observe(sec);
+    });
+
+    // Also handle click — immediately set active on click
+    document.querySelectorAll('.nav-link:not(.cta)').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.nav-link:not(.cta)').forEach(function(l) {
+          l.classList.remove('active');
+        });
+        link.classList.add('active');
+      });
+    });
+
+    // Set initial state
+    setActive('nav-analysis');
+  })();
 </script>
 </body>
 </html>

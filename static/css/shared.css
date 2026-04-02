@@ -49,9 +49,15 @@ nav {
   transition: background var(--t), color var(--t);
 }
 .nav-link:hover { background: var(--cream); color: var(--ink); }
-.nav-link.active { background: var(--ink); color: var(--paper); }
+.nav-link.active {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 2px 8px rgba(15,14,12,.18);
+}
+.nav-link.active:hover { background: var(--ink); color: var(--paper); }
 .nav-link.cta { background: var(--rust); color: var(--paper); }
 .nav-link.cta:hover { background: var(--rust-lt); }
+.nav-link { transition: background var(--t), color var(--t), box-shadow var(--t); }
 
 /* ── LAYOUT ───────────────────────────────────────────────────── */
 .page { max-width: 1140px; margin: 0 auto; padding: 0 5vw; }
